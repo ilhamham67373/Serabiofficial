@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Serabi SMP | Official Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #f5f3ff;
+            --text-purple: #4c1d95;
+            --bg-white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-purple);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%; height: 70px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 8%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--primary-light);
+            transition: var(--transition);
+        }
+
+        .nav-logo { font-weight: 800; color: var(--primary); text-decoration: none; font-size: 1.2rem; letter-spacing: -1px; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-purple); font-size: 0.75rem;
+            font-weight: 700; text-transform: uppercase; transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        .menu-toggle {
+            display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px;
+        }
+        .menu-toggle span {
+            display: block; width: 25px; height: 3px; background: var(--primary); border-radius: 3px;
+        }
+
+        /* --- HEADER & ABOUT --- */
+        header { padding: 140px 20px 60px; text-align: center; max-width: 900px; margin: 0 auto; }
+        .logo-img {
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 4px solid var(--primary); box-shadow: 0 15px 35px rgba(124, 58, 237, 0.2);
+            margin-bottom: 25px; object-fit: cover;
+        }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; line-height: 1.1; }
+        .about-box {
+            background: var(--primary-light); padding: 30px; border-radius: 25px;
+            margin-top: 30px; border: 1px dashed var(--primary);
+        }
+        .about-text { font-size: 1rem; font-weight: 500; opacity: 0.9; line-height: 1.8; color: var(--text-purple); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .section-title {
+            text-align: center; margin: 80px 0 40px; font-weight: 800; 
+            color: var(--primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px;
+        }
+
+        /* --- FAQ SECTION --- */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item {
+            margin-bottom: 15px; border: 1px solid var(--primary-light);
+            border-radius: 20px; overflow: hidden; transition: var(--transition);
+            background: #fff;
+        }
+        .faq-question {
+            width: 100%; padding: 20px 25px; background: none; border: none;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; font-family: inherit; font-weight: 700; color: var(--text-purple);
+            text-align: left; font-size: 1rem;
+        }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+            padding: 0 25px; font-size: 0.9rem; opacity: 0.8; line-height: 1.6;
+        }
+        .faq-item.active { border-color: var(--primary); background: var(--primary-light); }
+        .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 20px; }
+
+        /* --- FAN ART GALLERY --- */
+        .art-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px; margin-top: 20px;
+        }
+        .art-card {
+            background: #fff; border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--primary-light); cursor: pointer; transition: var(--transition);
+        }
+        .art-card:hover { transform: scale(1.03); border-color: var(--primary); }
+        .art-placeholder {
+            width: 100%; aspect-ratio: 4/3; background: #eee;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: var(--primary); font-size: 0.8rem;
+        }
+        .art-desc { padding: 15px; font-size: 0.85rem; font-weight: 700; text-align: center; }
+
+        /* --- MEMBER CARDS --- */
+        .member-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        /* Container utama untuk gambar maskot */
+.serabi-banner {
+    width: 100%;
+    max-width: 500px; /* Ukuran maksimal agar tidak terlalu besar di desktop */
+    margin: 20px auto;
+    aspect-ratio: 16 / 9; /* Mengunci rasio 16:9 */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px; /* Sudut melengkung agar serasi dengan desain web */
+    
+    /* Efek Shadow Ungu sesuai brand Serabi SMP */
+    box-shadow: 0 10px 30px rgba(106, 13, 173, 0.4); 
+    
+    transition: all 0.3s ease;
+}
+
+/* Mengatur gambar di dalam agar pas (fit) */
+.serabi-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Menggunakan contain agar karakter tidak terpotong */
+    background-color: #ffffff; /* Background putih jika gambar asli transparan */
+}
+
+/* Efek interaktif saat disentuh/hover */
+.serabi-banner:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(106, 13, 173, 0.6);
+}
+
+/* Penyesuaian untuk tampilan mobile (layar kecil) */
+@media (max-width: 480px) {
+    .serabi-banner {
+        width: 90%; /* Memberi ruang di sisi kiri dan kanan */
+    }
+}
+        }
+
+/* Efek saat kursor diarahkan ke gambar */
+.serabi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(128, 0, 128, 0.5);
+}
+        }
+
+        /* Efek interaktif saat mouse mendekat */
+        .promo-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(128, 0, 128, 0.7);
+        }
+        .member-card {
+            background: #fff; border-radius: 24px; border: 1px solid var(--primary-light);
+            text-align: center; padding: 15px; transition: var(--transition);
+        }
+        .member-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(124,58,237,0.1); }
+        .member-img-wrap { width: 100%; aspect-ratio: 1/1; border-radius: 18px; overflow: hidden; margin-bottom: 15px; background: var(--primary-light); }
+        .member-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .member-role { font-size: 0.6rem; background: var(--primary); color: white; padding: 4px 10px; border-radius: 50px; font-weight: 800; text-transform: uppercase; }
+        .member-name { font-size: 1rem; font-weight: 800; margin-top: 10px; display: block; }
+
+        /* --- FOOTER & GMAIL ICON --- */
+        footer { margin-top: 100px; padding: 80px 20px; text-align: center; background: var(--primary-light); border-radius: 50px 50px 0 0; }
+        .gmail-container {
+            display: inline-flex; align-items: center; background: white;
+            padding: 12px 25px; border-radius: 20px; gap: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-decoration: none;
+            transition: var(--transition); border: 2px solid transparent;
+        }
+        .gmail-container:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .gmail-icon {
+            width: 40px; height: 40px; background: #ea4335; color: white;
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+        .gmail-text { text-align: left; }
+        .gmail-text span { display: block; font-size: 0.7rem; font-weight: 700; color: #888; text-transform: uppercase; }
+        .gmail-text strong { font-size: 0.95rem; color: var(--text-purple); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { height: 60px; padding: 0 5%; }
+            .menu-toggle { display: flex; }
+            .nav-links {
+                position: fixed; top: 60px; left: -100%; width: 100%; background: white;
+                flex-direction: column; transition: 0.4s; border-bottom: 2px solid var(--primary-light);
+            }
+            .nav-links.active { left: 0; }
+            .nav-links a { display: block; padding: 15px; text-align: center; border-bottom: 1px solid #f9f9f9; }
+            header { padding: 100px 20px 40px; }
+            h1 { font-size: 2rem; }
+            .member-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }.hero-container {
+    text-align: center;
+    margin-top: 20px;
+}
+/* Container Utama */
+.yt-pill-wrapper {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 2px solid #9370DB;
+    padding: 12px;
+    border-radius: 30px;
+    margin-top: 20px;
+    width: 280px;
+    box-shadow: 0 0 20px rgba(147, 112, 219, 0.3);
+}
+
+/* Container Iframe */
+.yt-player-container {
+    height: 45px;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #000;
+}
+
+.yt-player-container iframe {
+    width: 100%;
+    height: 160px;
+    margin-top: -57px; /* Memotong video agar hanya terlihat kontroler */
+}
+
+/* Bar Status & Animasi */
+.yt-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.status-text {
+    font-size: 10px;
+    font-weight: bold;
+    color: #6A5ACD;
+    letter-spacing: 1px;
+}
+
+/* Visualizer Gelombang Suara */
+.visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 15px;
+}
+
+.visualizer span {
+    width: 3px;
+    background: #9370DB;
+    border-radius: 2px;
+    animation: wave 1.2s linear infinite;
+}
+
+/* Variasi tinggi animasi untuk tiap batang */
+.visualizer span:nth-child(1) { animation-delay: 0.0s; height: 5px; }
+.visualizer span:nth-child(2) { animation-delay: 0.3s; height: 10px; }
+.visualizer span:nth-child(3) { animation-delay: 0.6s; height: 8px; }
+.visualizer span:nth-child(4) { animation-delay: 0.9s; height: 12px; }
+
+@keyframes wave {
+    0%, 100% { height: 4px; }
+    50% { height: 15px; }
+}
+
+/* Efek Cahaya pada Player (Pulse) */
+.active-player {
+    animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+    0% { box-shadow: 0 0 0 0 rgba(147, 112, 219, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(147, 112, 219, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(147, 112, 219, 0); }
+}
+
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="nav-logo">SERABI SMP</a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#about" onclick="toggleMenu()">Information</a></li>
+            <li><a href="#faq" onclick="toggleMenu()">FAQ</a></li>
+            <li><a href="#fanart" onclick="toggleMenu()">FanArt</a></li>
+            <li><a href="#members" onclick="toggleMenu()">Member</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            <li><a href="#album" onclick="toggleMenu()">Album</a></li>
+        </ul>
+    </nav>
+
+    <header data-aos="fade-down">
+        <img src="https://i.postimg.cc/gj2NDXsf/Tak-berjudul37-20260102213846.png" class="logo-img" alt="Logo">
+        <h2 id="about"></h2>
+        <h1>Komunitas Minecraft <br><span style="color: var(--primary);">Serabi SMP</span></h1><div class="hero-container">
+
+<div class="hero-container">
+<div class="yt-pill-wrapper active-player">
+    <div class="yt-player-container">
+        <iframe 
+            id="serabiPlayer"
+            src="https://www.youtube.com/embed/PCpMOzqH7OA?enablejsapi=1&autoplay=1&controls=1" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media">
+        </iframe>
+    </div>
+    <div class="yt-status-bar">
+        <div class="visualizer">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <span class="status-text">TAP ANYWHERE FOR SOUND</span>
+    </div>
+</div>
+
+        <div class="about-box" data-aos="fade-up">
+            <p class="about-text">
+              <img src="https://i.postimg.cc/sXwX2K6D/IMG-20251231-WA0169.jpg" class="serabi-banner" alt="Logo">
+                <strong>Serabi SMP</strong> adalah sebuah <i>Private Minecraft Server</i> berbasis ekonomi-survival yang didedikasikan khusus untuk para Content Creator. Kami percaya bahwa kolaborasi adalah kunci kreativitas. Di sini, setiap member tidak hanya bermain, tetapi juga membangun narasi, menjalin diplomasi, dan menciptakan konten yang menghibur bagi audiens mereka.
+            </p>
+        </div>
+        <div id="about">
+            <div class="about-box">
+                <h2>INFOMATION</h2>
+                <p class="about-text">SerabiSMP merupakan server Survival Multiplayer dengan konsep hiburan, momen seru, serta interaksi antar pemain yang dibalut dengan konten menarik. Kami percaya bahwa kehadiranmu dapat membawa warna dan pengalaman baru bagi komunitas kami.</p>
+            </div>
+            
+             <div class="about-box">
+                    <p class="about-text">
+                    <h3>KNP SERVER INI SEPRTI BAKWAN SMP?</h3>
+                    <p>Bakwan Smp Adalah Server Survival Economy Yang Dibuat Oleh Seseorang Youtuber Dan Teman² Youtuber Nya Yang Bernama (<a href="https://youtube.com/@beaconcream?si=ieu_X1fvu9Nv9bRS" style="color: red; text-decoration: underline;">@Beaconcream</a>) , (<a href="https://youtube.com/@bakwanberkawan?si=Ol-h4NWgiwTpHYgZ" style="color: red; text-decoration: underline;">@bakwanberkawan</a>). Jadi Team Kita Serabi Comunity Ingin Membuat Server Yang Mirip Seperti Bakwan SMP!!.</p>
+                    <img src="https://i.postimg.cc/gJnTQ2ZL/images-(5).jpg" alt="logo" class="about-box">
+                <div class="">
+                    <p class="about-text">
+                    <h4>TENTANG SERABI SMP</h4>
+                    <p>Serabi Smp Awalnya Cuma Angan Angan Karena Kita Hanya Orang Biasa Yang Tidak Mengerti Cara Mengkoding, Setup Server, Developer Server, Awalnya Dari Salah Satu Teman Yaitu (<a href="https://youtube.com/@dexmcnew?si=CpZxjmISJQ2uf3Mn" style="color: red; text-decoration: underline;">@Dexmc_</a>) Dia Mengajak Aku Yaitu (<a href="https://www.youtube.com/@Dezirrr" style="color: red; text-decoration: underline;">@Dezirrr</a>) Mereka Bedua Pun Kebingungan Dengan Plugin, Mods Apa Yang Digunakan Untuk Membuat Server Seperti Bakwan SMP Tapi Setelah Reset Mendalam mereka Pun Sedikit Ada Jalan Yang Memudahkan Mereka Untuk Membuat Server, Banyak Cobaan Namun Mereka Akan Lewati!!</p>
+                  <img src="https://i.postimg.cc/tT2TgDSR/20251231-121652.jpg" alt="logo" class="serabi-banner">
+                  <iframe width="360" height="215" 
+                       src="https://www.youtube.com/embed/kgfqZvl4Yf4?autoplay=1&mute=1" 
+                       frameborder="0" 
+                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      allowfullscreen>
+                 </iframe>
+                 <h1 id="faq"></h1>
+            </div>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title" data-aos="fade-up">F.A.Q</h2>
+        <div class="faq-container" data-aos="fade-up">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">Apa platform server ini? <span><i class="fas fa-chevron-down"></i></span></button>
+                <div class="faq-answer"><p>Serabi SMP berjalan pada Minecraft Java Edition Software Forge versi 1.20.1 dengan optimasi performa tinggi untuk kenyamanan recording.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">Siapa saja yang bisa bergabung? <span><i class="fas fa-chevron-down"></i></span></button>
+                <div class="faq-answer"><p>Hanya Content Creator aktif (YouTube) yang telah lolos tahap seleksi oleh tim Admin Serabi SMP.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">Apakah ada sistem Lore/Cerita? <span><i class="fas fa-chevron-down"></i></span></button>
+                <div class="faq-answer"><p>Ya, server kami mendukung adanya interaksi antar pemain yang bersifat roleplay ringan untuk memperkaya konten masing-masing creator.</p></div>
+                <h1 id="fanart"></h1>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-aos="fade-up">Fan-Art Gallery</h2>
+        <div class="art-grid">
+            <div class="art-card" data-aos="zoom-in">
+                <div class="art-placeholder">ILLUSTRATION 1</div>
+                <div class="art-desc">Artwork by @Community_Art</div>
+            </div>
+            <div class="art-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="art-placeholder">ILLUSTRATION 2</div>
+                <div class="art-desc">Artwork by @Fan_Design</div>
+            </div>
+            <div class="art-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="art-placeholder">ILLUSTRATION 3</div>
+                <div class="art-desc">Artwork by @Sketch_Serabi</div>
+            </div>
+            <div class="art-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="art-placeholder">ILLUSTRATION 4</div>
+                <div class="art-desc">Artwork by @Sketch_Serabi</div>
+                <h1 id="members"></h1>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-aos="fade-up">Official Members</h2>
+        <div class="member-grid">
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/CM9wqhdt/Proyek-Baru-9-499E632.png"></div><span class="member-role">Owner</span><span class="member-name">DexMc</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/RZ5CjSBR/Proyek-Baru-10-E336D4A.png"></div><span class="member-role">Admin</span><span class="member-name">Dezirrr</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/k4Bd2zm0/Proyek-Baru-10-4B85FC1.png"></div><span class="member-role">Creator</span><span class="member-name">NeoGrand</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/gc8g9m8p/Proyek-Baru-10-3A49B87.png"></div><span class="member-role">Creator</span><span class="member-name">Asfrimm</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/Bvh0QsdN/Proyek-Baru-9-A17911E.png"></div><span class="member-role">Creator</span><span class="member-name">Clime</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/XYQh9LQb/Proyek-Baru-10-1250D52.png"></div><span class="member-role">Creator</span><span class="member-name">SingDc</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/FH5F2r4n/Proyek-Baru-10-288962C.png"></div><span class="member-role">Creator</span><span class="member-name">Zoekens</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/JzV79rLG/Proyek-Baru-10-59186C3.png"></div><span class="member-role">Creator</span><span class="member-name">DiamondZ</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/Z58YmGb1/Proyek-Baru-10-78AC6B3.png"></div><span class="member-role">Creator</span><span class="member-name">WillieCraft</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/bN2NCGKh/Proyek-Baru-10-8A9621E.png"></div><span class="member-role">Creator</span><span class="member-name">ErJet</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/KvgvqKdZ/Proyek-Baru-10-A0677C0.png"></div><span class="member-role">Creator</span><span class="member-name">AJAM</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/3x5rP8Tc/Proyek-Baru-10-A1E8F7A.png"></div><span class="member-role">Creator</span><span class="member-name">Leoss</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/T3V2xzd0/Proyek-Baru-10-EA3E0EF.png"></div><span class="member-role">Creator</span><span class="member-name">CreeperStar</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/tCVCS1Lq/Proyek-Baru-10-C494029.png"></div><span class="member-role">Creator</span><span class="member-name">Dexter</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/yYSYQJwz/Proyek-Baru-10-E9C72F0.png"></div><span class="member-role">Creator</span><span class="member-name">KupretKentut</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/k4Dpnfh7/Proyek-Baru-10-20D7FC4.png"></div><span class="member-role">Creator</span><span class="member-name">Voxcaz</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/mrds2R0J/Proyek-Baru-10-494E7D6.png"></div><span class="member-role">Creator</span><span class="member-name">Vixtir</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/nLMnn7jc/Proyek-Baru-10-8E40AEE.png"></div><span class="member-role">Creator</span><span class="member-name">Ghafahib</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/RV0D18bc/Proyek-Baru-10-44292A0.png"></div><span class="member-role">Creator</span><span class="member-name">OcvanByy</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/MKGF04r5/Proyek-Baru-10-A67F6CE.png"></div><span class="member-role">Creator</span><span class="member-name">Usahlan</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/k5sggfGN/Proyek-Baru-10-688E91E.png"></div><span class="member-role">Creator</span><span class="member-name">Yuki</span></div>
+            <div class="member-card" data-aos="fade-up"><div class="member-img-wrap"><img src="https://i.postimg.cc/QxpJTqjq/Proyek-Baru-10-3D0314B.png"></div><span class="member-role">Creator</span><span class="member-name">Raze</span></div>
+            <h1 id="contact"></h1>
+            <h1 id="album"></h1>
+            
+        </div>
+        <div>
+          <h2 class="section-title" data-aos="fade-up">ALBUM SERABISMP</h2>
+          <img src="https://i.postimg.cc/MZj9zf3Y/Tak-berjudul40-20260105082255.png" alt="logo" class="serabi-banner" data-aos="fade-up">
+          
+          <img src="https://i.postimg.cc/SQzgmY16/Tak-berjudul40-20260105082346.png" alt="logo" class="serabi-banner" data-aos="fade-up">
+        </div>
+
+    <footer>
+        <h3 style="margin-bottom: 25px;">Hubungi Kami</h3>
+        
+        <a href="mailto:ilhamade590@gmail.com" class="gmail-container">
+            <div class="gmail-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="gmail-text">
+                <span>Official Email</span>
+                <strong>ilhamade590@gmail.com</strong>
+            </div>
+        </a>
+
+        <p style="margin-top: 50px; font-size: 0.8rem; opacity: 0.5;">&copy; 2025 SERABI SMP. All Rights Reversed.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            if (window.innerWidth <= 768) nav.classList.toggle('active');
+        }
+
+        // FAQ logic
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+            
+            // Toggle icon rotation
+            const icon = element.querySelector('i');
+            icon.style.transform = isActive ? 'rotate(0deg)' : 'rotate(180deg)';
+        }// Script ini akan mencoba menyalakan suara saat user klik pertama kali di web
+window.addEventListener('click', function() {
+    var iframe = document.getElementById('serabiPlayer');
+    // Mengirim perintah ke YouTube API untuk un-mute
+    iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    
+    // Ubah teks status
+    document.querySelector('.status-text').innerText = "NOW PLAYING: SERABI CHILL";
+}, { once: true }); // Hanya berjalan satu kali saat klik pertama
+
+    </script>
+</body>
+</html>
